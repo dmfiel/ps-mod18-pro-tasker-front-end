@@ -1,0 +1,5 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+body * {
+  @apply transition-colors duration-200;
+}
