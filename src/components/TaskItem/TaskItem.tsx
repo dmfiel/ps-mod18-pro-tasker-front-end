@@ -1,11 +1,6 @@
 import { useState } from 'react';
 import { backendClient } from '../../clients/backendClient';
-import {
-  type TaskItemProps,
-  type TaskStatus,
-  type TaskType
-} from '../../types/index';
-import { PencilIcon, TrashIcon } from '@heroicons/react/24/outline';
+import { type TaskItemProps, type TaskType } from '../../types/index';
 import IconButton from '../IconButton/IconButton';
 // import { dateFormat } from '../../utils/taskUtils';
 

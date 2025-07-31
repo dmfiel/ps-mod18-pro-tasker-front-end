@@ -14,7 +14,6 @@ import Navbar from './components/Navbar';
 import FeedPage from './pages/FeedPage';
 import ProjectsPage from './pages/ProjectsPage';
 import { backendClient, setupCatch401 } from './clients/backendClient';
-import TasksPage from './pages/TasksPage';
 import ProjectPage from './pages/ProjectPage';
 
 function App() {

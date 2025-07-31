@@ -1,10 +1,10 @@
-import type { Priority, Task, TaskStatus } from '../../types';
+import type { Priority, TaskType, TaskStatus } from '../../types';
 
 // This component provides a task dashboard showing the number of tasks
 // in each category of priority and status. The information is color-coded
 // to allow at a glance understanding of how many critical tasks are open.
 
-export function Dashboard({ tasks }: { tasks: Task[] }) {
+export function Dashboard({ tasks }: { tasks: TaskType[] }) {
   function taskCount(priority: Priority, status: TaskStatus): number {
     return tasks.filter(t => t.priority === priority && t.status === status)
       .length;

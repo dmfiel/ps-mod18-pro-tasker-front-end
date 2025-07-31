@@ -1,12 +1,11 @@
 import { useState } from 'react';
 import {
-  blankTask,
   type Priority,
   type Sort,
   type TaskFilterProps,
   type TaskStatus
 } from '../../types';
-import { MagnifyingGlassIcon, PlusIcon } from '@heroicons/react/24/outline';
+import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 
 // This component provides an interface for the use to show parts of the task list
 // based on filtering by status or priority. Tasks can also be sorted by status,
@@ -14,11 +13,7 @@ import { MagnifyingGlassIcon, PlusIcon } from '@heroicons/react/24/outline';
 // by keyword to find what they need. All these choices are passed by to the
 // TaskList parent component to update the display.
 
-export function TaskFilter({
-  onFilterChange,
-  onEdit,
-  onShowForm
-}: TaskFilterProps) {
+export function TaskFilter({ onFilterChange }: TaskFilterProps) {
   const [searchText, setSearchText] = useState('');
 
   function changeHandler(event: React.ChangeEvent<HTMLInputElement>) {
@@ -116,17 +111,6 @@ export function TaskFilter({
           onClick={() => onFilterChange({ searchText: searchText })}
         >
           <MagnifyingGlassIcon className="size-6 text-blue-600" />
-        </button>
-        <button
-          title="Add task"
-          id="addTask"
-          className="w-fit py-1 text-blue-500 bg-blue-100 hover:cursor-pointer hover:text-blue-700 hover:bg-blue-200 focus:bg-blue-200 px-3 rounded-md"
-          onClick={() => {
-            onShowForm();
-            onEdit(blankTask);
-          }}
-        >
-          <PlusIcon className="size-6 text-blue-600" />
         </button>
       </div>
     </nav>

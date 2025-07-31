@@ -10,6 +10,8 @@ export type TaskType = {
   description: string;
   status: string;
   project?: string;
+  priority?: Priority;
+  dueDate?: string;
 };
 
 export type TaskStatus = 'To Do' | 'In Progress' | 'Done';
@@ -80,6 +82,6 @@ export interface Filters {
 
 export interface TaskFilterProps {
   onFilterChange: (filters: Filters) => void;
-  onEdit: (task: TaskType) => void;
-  onShowForm: () => void;
+  // onEdit: (task: TaskType) => void;
+  // onShowForm: () => void;
 }
