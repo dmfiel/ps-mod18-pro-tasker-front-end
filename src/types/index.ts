@@ -5,11 +5,11 @@ export type ProjectType = {
 };
 
 export type TaskType = {
-  _id: string;
+  _id?: string;
   title: string;
   description: string;
   status: string;
-  project: string;
+  project?: string;
 };
 
 export type TaskStatus = 'To Do' | 'In Progress' | 'Done';

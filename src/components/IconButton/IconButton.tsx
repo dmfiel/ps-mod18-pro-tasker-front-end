@@ -22,18 +22,12 @@ function IconButton({
 }: {
   icon: string;
   title: string;
-  status: boolean;
-  onClick: () => void;
+  status?: boolean;
+  onClick?: () => void;
 }) {
   const lcIcon = icon.toLowerCase();
   return (
-    <button
-      title={title}
-      onClick={() => {
-        onClick;
-      }}
-      className={BUTTON_CLASS}
-    >
+    <button title={title} onClick={onClick} className={BUTTON_CLASS}>
       {status && lcIcon === 'edit' && <PencilIcon className={ICON_CLASS} />}{' '}
       {status && lcIcon === 'delete' && <TrashIcon className={ICON_CLASS} />}{' '}
       {status && lcIcon === 'view' && (

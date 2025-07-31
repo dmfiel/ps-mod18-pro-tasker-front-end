@@ -1,19 +1,19 @@
 import './App.css';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import ThemeProvider, {
   BG_DARK,
   BG_LIGHT,
   ThemeButton,
   ThemeContext
 } from './context/ThemeContext';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
 import { HomePage } from './pages/Home';
 import RegisterPage from './pages/Register';
 import LoginPage from './pages/Login';
 import Navbar from './components/Navbar';
 import FeedPage from './pages/FeedPage';
 import ProjectsPage from './pages/ProjectsPage';
-import { backendClient } from './clients/backendClient';
+import { backendClient, setupCatch401 } from './clients/backendClient';
 import TasksPage from './pages/TasksPage';
 import ProjectPage from './pages/ProjectPage';
 
@@ -29,15 +29,23 @@ function App() {
 
 function ThemeWrapper() {
   const { theme } = useContext(ThemeContext);
+  const navigate = useNavigate();
+
   const [token, setToken] = useState(
     localStorage.getItem('pro-tasker-app-token') || ''
   );
 
   function saveToken(token: string) {
-    localStorage.setItem('pro-tasker-app-token', token);
-    backendClient.defaults.headers.common['Authorization'] = token; // update the JWT token for subsequent requests
     setToken(token);
   }
+
+  useEffect(() => {
+    localStorage.setItem('pro-tasker-app-token', token);
+    backendClient.defaults.headers.common['Authorization'] = token;
+    // update the JWT token for subsequent requests
+  }, [token]);
+
+  setupCatch401(navigate, token);
 
   return (
     <div

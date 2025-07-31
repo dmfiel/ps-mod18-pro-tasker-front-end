@@ -6,6 +6,7 @@ import {
   type TaskType
 } from '../../types/index';
 import { PencilIcon, TrashIcon } from '@heroicons/react/24/outline';
+import IconButton from '../IconButton/IconButton';
 // import { dateFormat } from '../../utils/taskUtils';
 
 // This component renders an individual task. The status and priority are shown with
@@ -31,8 +32,8 @@ TaskItemProps) {
       const res = await backendClient.put(`/tasks/${task._id}`, {
         ...taskFields
       });
-
       console.log(res);
+
       setEdit(false);
       refreshTasks();
     } catch (error) {
@@ -40,7 +41,17 @@ TaskItemProps) {
     }
   }
 
-  function onDelete() {}
+  async function updateStatus(e: React.ChangeEvent<HTMLSelectElement>) {
+    onChange(e);
+    try {
+      const res = await backendClient.put(`/tasks/${task._id}`, {
+        status: e.currentTarget.value
+      });
+      console.log(res);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   function onChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -49,6 +60,17 @@ TaskItemProps) {
       ...taskFields,
       [e.currentTarget.name]: e.currentTarget.value
     });
+  }
+
+  async function onDelete() {
+    try {
+      const res = await backendClient.delete(`/tasks/${task._id}`);
+      console.log(res);
+
+      refreshTasks();
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   return (
@@ -63,7 +85,7 @@ TaskItemProps) {
             <select
               name="status"
               value={taskFields.status}
-              onChange={onChange}
+              onChange={updateStatus}
               className={`px-2 py-1 border border-white hover:cursor-pointer hover:border-black focus:border-black rounded-md mx-2 ${
                 taskFields.status === 'To Do'
                   ? 'bg-yellow-50 text-yellow-700'
@@ -85,22 +107,12 @@ TaskItemProps) {
                 Done
               </option>
             </select>
-            <button
-              title="Edit task"
-              id="editTask"
-              className="w-fit py-1 text-blue-500 bg-blue-100 hover:cursor-pointer hover:text-blue-700 hover:bg-blue-200 focus:bg-blue-200 px-3 rounded-md border"
+            <IconButton
+              icon="Edit"
+              title="Edit Task"
               onClick={() => setEdit(true)}
-            >
-              <PencilIcon className="size-6 text-blue-600" />
-            </button>
-            <button
-              title="Delete task"
-              id="delete"
-              className="text-red-500 bg-red-50 hover:cursor-pointer hover:text-red-700 hover:bg-red-100 focus:bg-red-100 px-3 rounded-md border border-white hover:border-black focus:border-black"
-              onClick={() => onDelete()}
-            >
-              <TrashIcon className="size-6 text-red-600" />
-            </button>
+            />{' '}
+            <IconButton icon="Delete" title="Delete Task" onClick={onDelete} />
           </div>
         </div>
       )}
@@ -111,6 +123,7 @@ TaskItemProps) {
         >
           <div className="flex flex-col gap-2">
             <input
+              autoFocus
               type="text"
               name="title"
               value={taskFields.title}
