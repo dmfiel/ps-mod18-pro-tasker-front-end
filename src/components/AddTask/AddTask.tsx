@@ -85,7 +85,7 @@ export function AddTask({
           className={`px-2 py-1 border border-white hover:cursor-pointer hover:border-black focus:border-black rounded-md mx-2 ${
             taskFields?.status === 'To Do'
               ? 'bg-yellow-50 text-yellow-700'
-              : taskFields?.status === 'Done'
+              : taskFields?.status === 'In Progress'
               ? 'bg-green-50 text-green-700'
               : 'bg-blue-50 text-blue-700'
           }`}
