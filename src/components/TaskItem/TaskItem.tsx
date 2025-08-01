@@ -1,7 +1,12 @@
 import { useState } from 'react';
 import { backendClient } from '../../clients/backendClient';
-import { type TaskItemProps, type TaskType } from '../../types/index';
+import {
+  PRIORITY_NAMES,
+  type TaskItemProps,
+  type TaskType
+} from '../../types/index';
 import IconButton from '../IconButton/IconButton';
+import { dateFormat } from '../../utils/taskUtils';
 // import { dateFormat } from '../../utils/taskUtils';
 
 // This component renders an individual task. The status and priority are shown with
@@ -102,6 +107,22 @@ TaskItemProps) {
                 Done
               </option>
             </select>
+            <div className="mt-2 flex gap-5 text-sm">
+              <span
+                className={`${
+                  task.priority === '3-low' || !task.priority
+                    ? 'text-green-500'
+                    : task.priority === '2-medium'
+                    ? 'text-yellow-500'
+                    : 'text-red-500'
+                }`}
+              >
+                Priority: {PRIORITY_NAMES[task.priority || '3-low']}
+              </span>
+              <span className="text-gray-500">
+                Due: {!task.dueDate ? '' : dateFormat(new Date(task.dueDate))}
+              </span>
+            </div>
             <IconButton
               icon="Edit"
               title="Edit Task"
@@ -159,6 +180,45 @@ TaskItemProps) {
                 Done
               </option>
             </select>
+            <div className="mt-2 flex gap-5 text-sm items-center">
+              <select
+                id="priority"
+                name="priority"
+                value={taskFields.priority || '3-low'}
+                onChange={onChange}
+                className={`py-1 border border-white hover:border-black focus:border-black rounded-md ${
+                  taskFields.priority === '3-low' || !taskFields.priority
+                    ? 'bg-green-50 text-green-500'
+                    : taskFields.priority === '2-medium'
+                    ? 'bg-yellow-50 text-yellow-500'
+                    : 'bg-red-50 text-red-500'
+                }`}
+              >
+                <option value="1-high" className="bg-red-50 text-red-700">
+                  High
+                </option>
+                <option
+                  value="2-medium"
+                  className="bg-yellow-50 text-yellow-700"
+                >
+                  Medium
+                </option>
+                <option value="3-low" className="bg-green-50 text-green-700">
+                  Low
+                </option>
+              </select>
+              <span className="text-gray-500">
+                Due:&nbsp;
+                <input
+                  id="dueDate"
+                  name="dueDate"
+                  type="date"
+                  value={taskFields.dueDate}
+                  onChange={onChange}
+                  className="border rounded-md py-1 px-2 w-fit"
+                />
+              </span>
+            </div>
             <input type="submit" value="Save" />
           </div>
         </form>
