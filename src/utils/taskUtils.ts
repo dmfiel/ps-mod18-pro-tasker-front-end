@@ -7,7 +7,7 @@ export function sortCompare(a: TaskType, b: TaskType, sortOrder: Sort): number {
   switch (sortOrder) {
     case 'status':
       if (a.status === b.status) return 0;
-      return a.status > b.status ? 1 : -1;
+      return a.status < b.status ? 1 : -1;
       break;
     case 'date':
       if (a.dueDate === b.dueDate || !a.dueDate || !b.dueDate) return 0;

@@ -3,9 +3,11 @@ import { backendClient } from '../clients/backendClient';
 import { useNavigate, useParams } from 'react-router-dom';
 import IconButton from '../components/IconButton/IconButton';
 import { isEmpty } from '../utils/isEmpty';
-import type { ProjectType, TaskType } from '../types';
+import type { Filters, ProjectType, TaskType } from '../types';
 import { TaskItem } from '../components/TaskItem/TaskItem';
 import { AddTask } from '../components/AddTask/AddTask';
+import { TaskFilter } from '../components/TaskFilter/TaskFilter';
+import { filterTasks } from '../utils/taskUtils';
 
 function ProjectPage({ token }: { token: string }) {
   const navigate = useNavigate();
@@ -106,6 +108,21 @@ function ProjectPage({ token }: { token: string }) {
     }
   }
 
+  const [filters, setFilters] = useState<Filters>({
+    status: 'all',
+    priority: 'all',
+    sort: 'priority',
+    searchText: ''
+  });
+  function onFilterChange({ status, priority, sort, searchText }: Filters) {
+    const newFilters: Filters = { ...filters };
+    if (status) newFilters.status = status;
+    if (priority) newFilters.priority = priority;
+    if (sort) newFilters.sort = sort;
+    newFilters.searchText = searchText ? searchText.toLowerCase() : '';
+    setFilters(newFilters);
+  }
+
   return (
     <main className="flex flex-col gap-5">
       {!edit && project && (
@@ -168,11 +185,14 @@ function ProjectPage({ token }: { token: string }) {
         <AddTask projectId={projectId} fetchTasks={fetchTasks} />
       )}
 
-      {tasks &&
-        !isEmpty(tasks) &&
-        tasks.map(task => (
-          <TaskItem key={task._id} task={task} refreshTasks={fetchTasks} />
-        ))}
+      {tasks && !isEmpty(tasks) && (
+        <>
+          <TaskFilter onFilterChange={onFilterChange} />
+          {filterTasks(tasks, filters).map(task => (
+            <TaskItem key={task._id} task={task} refreshTasks={fetchTasks} />
+          ))}
+        </>
+      )}
     </main>
   );
 }

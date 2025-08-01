@@ -34,7 +34,7 @@ export function TaskFilter({ onFilterChange }: TaskFilterProps) {
   return (
     <nav
       role="navigation"
-      className="flex flex-col gap-5 p-5 bg-green-50 border rounded-lg w-fit mx-auto"
+      className="flex flex-col gap-5 p-5 bg-green-50 dark:bg-green-950 border rounded-lg w-fit mx-auto"
     >
       <div id="filters" className="flex gap-5 w-fit mx-auto">
         <div>
@@ -52,9 +52,9 @@ export function TaskFilter({ onFilterChange }: TaskFilterProps) {
             className="bg-white dark:bg-gray-800 px-2 py-1 block w-full rounded-md shadow-sm border border-white hover:cursor-pointer hover:border-black focus:border-black"
           >
             <option value="all">All Statuses</option>
-            <option value="To Do">Pending</option>
+            <option value="To Do">To Do</option>
             <option value="In Progress">In Progress</option>
-            <option value="Done">Completed</option>
+            <option value="Done">Done</option>
           </select>
         </div>
         <div>
@@ -102,7 +102,7 @@ export function TaskFilter({ onFilterChange }: TaskFilterProps) {
           onChange={changeHandler}
           onKeyDown={keyHandler}
           placeholder="Search for tasks"
-          className="border rounded-md py-1 px-2 w-full"
+          className="bg-white dark:bg-gray-800 border rounded-md py-1 px-2 w-full"
         />
         <button
           title="Search"

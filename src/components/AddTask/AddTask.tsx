@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { TaskType } from '../../types';
+import type { Priority, TaskType } from '../../types';
 import { backendClient } from '../../clients/backendClient';
 import IconButton from '../IconButton/IconButton';
 
@@ -13,7 +13,8 @@ export function AddTask({
   const emptyTask = {
     title: '',
     description: '',
-    status: 'To Do'
+    status: 'To Do',
+    priority: '3-low' as Priority
   };
   const [taskFields, setTaskFields] = useState<TaskType>(emptyTask);
 
@@ -66,7 +67,7 @@ export function AddTask({
           placeholder="Task Title"
           value={taskFields?.title || ''}
           onChange={onChangeTask}
-          className="text-lg font-semibold border border-black dark:border-white px-2"
+          className="text-lg font-semibold border rounded-md border-black dark:border-white px-2"
         />
         <input
           type="text"
@@ -74,7 +75,7 @@ export function AddTask({
           placeholder="Task Description"
           value={taskFields?.description || ''}
           onChange={onChangeTask}
-          className="text-gray-600 border border-black dark:border-white px-2"
+          className="text-gray-600 border rounded-md border-black dark:border-white px-2"
         />
       </div>
       <div className="flex gap-2">
@@ -100,42 +101,40 @@ export function AddTask({
             Done
           </option>
         </select>
-        <div className="mt-2 flex gap-5 text-sm items-center">
-          <select
-            id="priority"
-            name="priority"
-            value={taskFields.priority}
+        <select
+          id="priority"
+          name="priority"
+          value={taskFields.priority}
+          onChange={onChangeTask}
+          className={`px-2 py-1 border border-white hover:cursor-pointer hover:border-black focus:border-black rounded-md mx-2 ${
+            taskFields.priority === '3-low'
+              ? 'bg-green-50 text-green-500'
+              : taskFields.priority === '2-medium'
+              ? 'bg-yellow-50 text-yellow-500'
+              : 'bg-red-50 text-red-500'
+          }`}
+        >
+          <option value="1-high" className="bg-red-50 text-red-700">
+            High
+          </option>
+          <option value="2-medium" className="bg-yellow-50 text-yellow-700">
+            Medium
+          </option>
+          <option value="3-low" className="bg-green-50 text-green-700">
+            Low
+          </option>
+        </select>
+        <span className="text-gray-500">
+          Due:&nbsp;
+          <input
+            id="dueDate"
+            name="dueDate"
+            type="date"
+            value={taskFields.dueDate}
             onChange={onChangeTask}
-            className={`py-1 border border-white hover:border-black focus:border-black rounded-md ${
-              taskFields.priority === '3-low'
-                ? 'bg-green-50 text-green-500'
-                : taskFields.priority === '2-medium'
-                ? 'bg-yellow-50 text-yellow-500'
-                : 'bg-red-50 text-red-500'
-            }`}
-          >
-            <option value="1-high" className="bg-red-50 text-red-700">
-              High
-            </option>
-            <option value="2-medium" className="bg-yellow-50 text-yellow-700">
-              Medium
-            </option>
-            <option value="3-low" className="bg-green-50 text-green-700">
-              Low
-            </option>
-          </select>
-          <span className="text-gray-500">
-            Due:&nbsp;
-            <input
-              id="dueDate"
-              name="dueDate"
-              type="date"
-              value={taskFields.dueDate}
-              onChange={onChangeTask}
-              className="border rounded-md py-1 px-2 w-fit"
-            />
-          </span>
-        </div>
+            className="border rounded-md py-1 px-2 w-fit"
+          />
+        </span>
         <IconButton icon="Edit" title="Save Task" />{' '}
         <IconButton
           icon="Delete"

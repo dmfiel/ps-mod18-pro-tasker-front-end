@@ -146,14 +146,14 @@ TaskItemProps) {
               name="title"
               value={taskFields.title}
               onChange={onChange}
-              className="text-lg font-semibold border border-black dark:border-white px-2"
+              className="text-lg font-semibold border rounded-md border-black dark:border-white px-2"
             />
             <input
               type="text"
               name="description"
               value={taskFields.description}
               onChange={onChange}
-              className="text-gray-600 border border-black dark:border-white px-2"
+              className="text-gray-600 border rounded-md border-black dark:border-white px-2"
             />
           </div>
           <div className="flex gap-2">
