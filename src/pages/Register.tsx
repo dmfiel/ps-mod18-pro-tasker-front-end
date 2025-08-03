@@ -32,7 +32,7 @@ function RegisterPage() {
     setFormData({ ...formData, [e.currentTarget.name]: e.currentTarget.value });
   };
   return (
-    <main className="border rounded-lg p-5">
+    <main className="border rounded-lg p-5 bg-gray-100 dark:bg-gray-900">
       <h1 className="font-bold">Registration Page</h1>
 
       <form onSubmit={handleSubmit} className="flex flex-col">

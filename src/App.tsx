@@ -49,7 +49,7 @@ function ThemeWrapper() {
   return (
     <div
       id="all"
-      className={`${theme} w-full h-full bg-[${BG_LIGHT}] dark:bg-[${BG_DARK}] text-black dark:text-white flex flex-col min-h-screen px-5 pt-5`}
+      className={`${theme} w-full h-full bg-[${BG_LIGHT}] dark:bg-[${BG_DARK}] text-black dark:text-white flex flex-col min-h-screen px-5 pt-5 wrap-anywhere text-xs md:text-sm lg:text-base`}
     >
       <header className="grid grid-cols-3">
         <div></div>

@@ -74,19 +74,19 @@ TaskItemProps) {
   }
 
   return (
-    <div className="p-4 border rounded-lg shadow-sm hover:shadow-md transition-shadow bg-white dark:bg-black dark:border-gray-700">
+    <div className="p-4 border rounded-lg shadow-sm hover:shadow-md transition-shadow bg-gray-100 dark:bg-gray-900 dark:border-gray-700">
       {!edit && (
-        <div className="flex justify-between items-start">
+        <div className="flex flex-col lg:flex-row justify-between items-start gap-2">
           <div>
             <h3 className="text-lg font-semibold">{taskFields.title}</h3>
             <p className="text-gray-600">{taskFields.description}</p>
           </div>
-          <div className="flex gap-2">
+          <div className="flex flex-col lg:flex-row gap-2">
             <select
               name="status"
               value={taskFields.status}
               onChange={updateStatus}
-              className={`px-2 py-1 border border-white hover:cursor-pointer hover:border-black focus:border-black rounded-md mx-2 ${
+              className={`px-2 py-1 border border-white hover:cursor-pointer hover:border-black focus:border-black rounded-md ${
                 taskFields.status === 'To Do'
                   ? 'bg-yellow-50 text-yellow-700'
                   : taskFields.status === 'In Progress'
@@ -125,12 +125,18 @@ TaskItemProps) {
                   : 'Due: ' + dateFormat(new Date(task.dueDate))}
               </span>
             </div>
-            <IconButton
-              icon="Edit"
-              title="Edit Task"
-              onClick={() => setEdit(true)}
-            />{' '}
-            <IconButton icon="Delete" title="Delete Task" onClick={onDelete} />
+            <div className="flex">
+              <IconButton
+                icon="Edit"
+                title="Edit Task"
+                onClick={() => setEdit(true)}
+              />{' '}
+              <IconButton
+                icon="Delete"
+                title="Delete Task"
+                onClick={onDelete}
+              />
+            </div>
           </div>
         </div>
       )}
