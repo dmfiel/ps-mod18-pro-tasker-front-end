@@ -32,41 +32,51 @@ function RegisterPage() {
     setFormData({ ...formData, [e.currentTarget.name]: e.currentTarget.value });
   };
   return (
-    <main>
-      <h1>Register Page</h1>
+    <main className="border rounded-lg p-5">
+      <h1 className="font-bold">Registration Page</h1>
 
-      <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-        <label htmlFor="username" />
+      <form onSubmit={handleSubmit} className="flex flex-col">
+        <label htmlFor="username" className="mt-5">
+          User Name:
+        </label>
         <input
           type="text"
           name="username"
           placeholder="User Name"
           value={formData.username}
           onChange={handleChange}
-          className="border"
+          className="border rounded px-2 py-1 text-gray-500"
         />
 
-        <label htmlFor="email" />
+        <label htmlFor="email" className="mt-5">
+          Email Address:
+        </label>
         <input
           type="email"
           name="email"
           placeholder="Email"
           value={formData.email}
           onChange={handleChange}
-          className="border"
+          className="border rounded px-2 py-1 text-gray-500"
         />
 
-        <label htmlFor="password" />
+        <label htmlFor="password" className="mt-5">
+          Password:
+        </label>
         <input
           type="password"
           name="password"
           placeholder="Password"
           value={formData.password}
           onChange={handleChange}
-          className="border"
+          className="border rounded px-2 py-1 text-gray-500"
         />
 
-        <input type="submit" value="Register" className="border" />
+        <input
+          type="submit"
+          value="Register"
+          className="border rounded mx-auto px-2 py-1 mt-5 bg-gray-800 dark:bg-gray-200 text-gray-200 dark:text-gray-800"
+        />
       </form>
     </main>
   );

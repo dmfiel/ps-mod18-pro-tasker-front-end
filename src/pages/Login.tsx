@@ -31,31 +31,39 @@ function LoginPage({ saveToken }: { saveToken: (_token: string) => void }) {
     setFormData({ ...formData, [e.currentTarget.name]: e.currentTarget.value });
   };
   return (
-    <main>
-      <h1 className="mt-5">Welcome to Pro Tasker</h1>
+    <main className="border rounded-lg p-5">
+      <h1 className="">Welcome to Pro Tasker</h1>
       <h2>Please login to track your projects.</h2>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-        <label htmlFor="email" />
+      <form onSubmit={handleSubmit} className="flex flex-col">
+        <label htmlFor="email" className="mt-5">
+          Email Address:
+        </label>
         <input
           type="email"
           name="email"
           placeholder="Email"
           value={formData.email}
           onChange={handleChange}
-          className="border"
+          className="border rounded px-2 py-1 text-gray-500"
         />
 
-        <label htmlFor="password" />
+        <label htmlFor="password" className="mt-5">
+          Password:
+        </label>
         <input
           type="password"
           name="password"
           placeholder="Password"
           value={formData.password}
           onChange={handleChange}
-          className="border"
+          className="border rounded px-2 py-1 text-gray-500"
         />
 
-        <input type="submit" value="Login" className="border" />
+        <input
+          type="submit"
+          value="Login"
+          className="border rounded mx-auto px-2 py-1 mt-5 bg-gray-800 dark:bg-gray-200 text-gray-200 dark:text-gray-800"
+        />
       </form>
     </main>
   );
