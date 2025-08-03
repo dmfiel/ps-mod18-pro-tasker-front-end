@@ -2,13 +2,15 @@ import { useEffect, useState } from 'react';
 import { backendClient } from '../clients/backendClient';
 import { NavLink, useNavigate } from 'react-router-dom';
 import IconButton from '../components/IconButton/IconButton';
-import type { ProjectType } from '../types';
+import type { ProjectType, TaskType } from '../types';
 import { AddProject } from '../components/AddProject/AddProject';
+import { Dashboard } from '../components/Dashboard/Dashboard';
 
 function ProjectsPage({ token }: { token: string }) {
   const navigate = useNavigate();
   const [projects, setProjects] = useState(new Array<ProjectType>());
   const [addProject, setAddProject] = useState(false);
+  const [tasks, setTasks] = useState(new Array<TaskType>());
 
   const fetchProjects = async () => {
     try {
@@ -30,14 +32,29 @@ function ProjectsPage({ token }: { token: string }) {
     }
   };
 
+  const fetchTasks = async () => {
+    try {
+      const res = await backendClient.get(`/tasks`);
+
+      setTasks(res.data);
+
+      console.log(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     fetchProjects();
+    fetchTasks();
   }, []);
 
   return (
     <main className="flex flex-col gap-5">
       {!addProject && (
         <>
+          <Dashboard tasks={tasks} />
+
           <h1>
             Your Projects{' '}
             <IconButton

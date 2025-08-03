@@ -8,6 +8,7 @@ import { TaskItem } from '../components/TaskItem/TaskItem';
 import { AddTask } from '../components/AddTask/AddTask';
 import { TaskFilter } from '../components/TaskFilter/TaskFilter';
 import { filterTasks } from '../utils/taskUtils';
+import { Dashboard } from '../components/Dashboard/Dashboard';
 
 function ProjectPage({ token }: { token: string }) {
   const navigate = useNavigate();
@@ -180,6 +181,10 @@ function ProjectPage({ token }: { token: string }) {
           <input type="submit" value="Post" />
         </form>
       )}
+
+      <Dashboard tasks={tasks} />
+
+      <h2 className="mx-auto strong">Tasks</h2>
 
       {addTask && projectId && (
         <AddTask projectId={projectId} fetchTasks={fetchTasks} />
