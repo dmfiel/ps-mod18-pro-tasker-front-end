@@ -15,6 +15,8 @@ import FeedPage from './pages/FeedPage';
 import ProjectsPage from './pages/ProjectsPage';
 import { backendClient, setupCatch401 } from './clients/backendClient';
 import ProjectPage from './pages/ProjectPage';
+import bgLight from './assets/bg-light.jpg';
+import bgDark from './assets/bg-dark.jpg';
 
 function App() {
   return (
@@ -49,7 +51,11 @@ function ThemeWrapper() {
   return (
     <div
       id="all"
-      className={`${theme} w-full h-full bg-[${BG_LIGHT}] dark:bg-[${BG_DARK}] text-black dark:text-white flex flex-col min-h-screen px-5 pt-5 wrap-anywhere text-xs md:text-sm lg:text-base`}
+      className={`${theme} w-full h-full bg-no-repeat bg-center bg-cover
+       bg-[${BG_LIGHT}] dark:bg-[${BG_DARK}] text-black dark:text-white flex flex-col min-h-screen px-5 pt-5 wrap-anywhere text-xs md:text-sm lg:text-base`}
+      style={{
+        backgroundImage: `url('${theme === 'light' ? bgLight : bgDark}')`
+      }}
     >
       <header className="grid grid-cols-3">
         <div></div>
