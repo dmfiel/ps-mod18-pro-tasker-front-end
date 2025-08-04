@@ -5,7 +5,7 @@ import {
   type TaskFilterProps,
   type TaskStatus
 } from '../../types';
-import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import IconButton from '../IconButton/IconButton';
 
 // This component provides an interface for the use to show parts of the task list
 // based on filtering by status or priority. Tasks can also be sorted by status,
@@ -104,14 +104,11 @@ export function TaskFilter({ onFilterChange }: TaskFilterProps) {
           placeholder="Search for tasks"
           className="bg-white dark:bg-gray-800 border rounded-md py-1 px-2 w-full"
         />
-        <button
+        <IconButton
+          icon="search"
           title="Search"
-          id="search"
-          className="text-blue-500 bg-blue-100 hover:cursor-pointer hover:text-blue-700 hover:bg-blue-200 focus:bg-blue-200 px-3 rounded-md"
           onClick={() => onFilterChange({ searchText: searchText })}
-        >
-          <MagnifyingGlassIcon className="size-6 text-blue-600" />
-        </button>
+        />
       </div>
     </nav>
   );
