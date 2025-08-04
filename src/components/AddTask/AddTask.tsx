@@ -67,6 +67,8 @@ export function AddTask({
           placeholder="Task Title"
           value={taskFields?.title || ''}
           onChange={onChangeTask}
+                  required={true}
+
           className="text-lg font-semibold border rounded-md border-black dark:border-white px-2"
         />
         <input

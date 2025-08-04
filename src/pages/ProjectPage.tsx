@@ -165,6 +165,7 @@ function ProjectPage({ token }: { token: string }) {
             name="name"
             value={projectFields.name}
             onChange={onChange}
+            required={true}
             className="text-lg font-semibold border border-black dark:border-white px-2"
           />
 
@@ -175,6 +176,7 @@ function ProjectPage({ token }: { token: string }) {
             placeholder="description"
             value={projectFields.description}
             onChange={onChange}
+            required={true}
             className="text-gray-600 border border-black dark:border-white px-2"
           />
 
@@ -182,7 +184,7 @@ function ProjectPage({ token }: { token: string }) {
         </form>
       )}
 
-      <Dashboard tasks={tasks} />
+      {tasks && !isEmpty(tasks) && <Dashboard tasks={tasks} />}
 
       <h2 className="mx-auto strong">Tasks</h2>
 
@@ -197,6 +199,16 @@ function ProjectPage({ token }: { token: string }) {
             <TaskItem key={task._id} task={task} refreshTasks={fetchTasks} />
           ))}
         </>
+      )}
+      {(!tasks || isEmpty(tasks)) && !addTask && (
+        <div className="flex gap-2 items-center mx-auto">
+          <h3>Create a new task</h3>{' '}
+          <IconButton
+            icon="Add"
+            title="Create Task"
+            onClick={() => setAddTask(true)}
+          />
+        </div>
       )}
     </main>
   );

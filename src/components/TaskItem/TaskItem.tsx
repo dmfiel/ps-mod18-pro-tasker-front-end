@@ -152,6 +152,7 @@ TaskItemProps) {
               name="title"
               value={taskFields.title}
               onChange={onChange}
+              required={true}
               className="text-lg font-semibold border rounded-md border-black dark:border-white px-2"
             />
             <input

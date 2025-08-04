@@ -46,6 +46,7 @@ function RegisterPage() {
           placeholder="User Name"
           value={formData.username}
           onChange={handleChange}
+          required={true}
           className="border rounded px-2 py-1 text-gray-500"
         />
 
@@ -58,6 +59,7 @@ function RegisterPage() {
           placeholder="Email"
           value={formData.email}
           onChange={handleChange}
+          required={true}
           className="border rounded px-2 py-1 text-gray-500"
         />
 
@@ -70,6 +72,7 @@ function RegisterPage() {
           placeholder="Password"
           value={formData.password}
           onChange={handleChange}
+          required={true}
           className="border rounded px-2 py-1 text-gray-500"
         />
 

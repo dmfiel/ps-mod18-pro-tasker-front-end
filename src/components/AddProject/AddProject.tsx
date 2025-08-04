@@ -41,6 +41,7 @@ export function AddProject({ fetchProjects }: { fetchProjects: () => void }) {
         name="name"
         value={projectName}
         onChange={e => setProjectName(e.target.value)}
+        required={true}
         className="text-lg font-semibold border border-black dark:border-white px-2"
       />
       <label htmlFor="description" />
@@ -50,6 +51,7 @@ export function AddProject({ fetchProjects }: { fetchProjects: () => void }) {
         placeholder="description"
         value={description}
         onChange={e => setDescription(e.target.value)}
+        required={true}
         className="text-gray-600 border border-black dark:border-white px-2"
       />
       <IconButton icon="Edit" title="Save Project" />{' '}

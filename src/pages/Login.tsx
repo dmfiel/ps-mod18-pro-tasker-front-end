@@ -45,6 +45,7 @@ function LoginPage({ saveToken }: { saveToken: (_token: string) => void }) {
           placeholder="Email"
           value={formData.email}
           onChange={handleChange}
+          required={true}
           className="border rounded px-2 py-1 text-gray-500"
         />
 
@@ -57,6 +58,7 @@ function LoginPage({ saveToken }: { saveToken: (_token: string) => void }) {
           placeholder="Password"
           value={formData.password}
           onChange={handleChange}
+          required={true}
           className="border rounded px-2 py-1 text-gray-500"
         />
 
