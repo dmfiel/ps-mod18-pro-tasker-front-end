@@ -64,7 +64,7 @@ This project provides a full-stack application for project and task management, 
 
 ### ⏱️ Scheduling / Automation
 
-![Cron Job](https://img.shields.io/badge/Cron%20Job-4285F4?style=for-the-badge&logo=cronjob&logoColor=white)
+![Cron Job](https://img.shields.io/badge/Cron%20Job-4285F4?style=flat-square&logo=cronjob&logoColor=white)
 
 ## Overview
 
