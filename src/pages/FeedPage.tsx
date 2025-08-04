@@ -74,7 +74,7 @@ function FeedPage() {
       >
         <h2>What's in your mind?</h2>
         <label htmlFor="title" />
-        <input
+        <input autoFocus
           type="text"
           title={title}
           placeholder="title"

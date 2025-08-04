@@ -40,6 +40,7 @@ function RegisterPage() {
           User Name:
         </label>
         <input
+          autoFocus
           type="text"
           name="username"
           placeholder="User Name"

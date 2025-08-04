@@ -39,6 +39,7 @@ function LoginPage({ saveToken }: { saveToken: (_token: string) => void }) {
           Email Address:
         </label>
         <input
+          autoFocus
           type="email"
           name="email"
           placeholder="Email"

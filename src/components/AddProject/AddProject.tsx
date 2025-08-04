@@ -34,6 +34,7 @@ export function AddProject({ fetchProjects }: { fetchProjects: () => void }) {
       <h2>Create a new project:</h2>
       <label htmlFor="name" />
       <input
+        autoFocus
         type="text"
         title="Project Name"
         placeholder="Project Name"

@@ -148,6 +148,7 @@ TaskItemProps) {
           <div className="flex flex-col gap-2">
             <input
               autoFocus
+              autoFocus
               type="text"
               name="title"
               value={taskFields.title}
