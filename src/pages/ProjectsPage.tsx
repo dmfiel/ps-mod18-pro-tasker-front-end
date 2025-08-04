@@ -66,7 +66,7 @@ function ProjectsPage({ token }: { token: string }) {
           {projects.map(project => (
             <section
               key={project._id}
-              className="border rounded-lg bg-gray-100 dark:bg-gray-900 p-5"
+              className="border rounded-lg drop-shadow-lg bg-gray-100 dark:bg-gray-900 p-5"
             >
               <NavLink
                 to={`${import.meta.env.VITE_FRONTEND_URL}/project/${

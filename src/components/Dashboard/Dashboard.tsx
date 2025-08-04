@@ -11,7 +11,7 @@ export function Dashboard({ tasks }: { tasks: TaskType[] }) {
   }
 
   return (
-    <div className="grid grid-cols-[repeat(4,auto))] p-5 bg-green-50 dark:bg-green-950 border rounded-lg w-fit mx-auto text-center font-medium text-sm lg:text-base">
+    <div className="grid grid-cols-[repeat(4,auto))] p-5 bg-green-50 dark:bg-green-950 border rounded-lg drop-shadow-lg w-fit mx-auto text-center font-medium text-sm lg:text-base">
       <div></div>
       <div></div>
       <div>Priority</div>

@@ -31,7 +31,7 @@ function LoginPage({ saveToken }: { saveToken: (_token: string) => void }) {
     setFormData({ ...formData, [e.currentTarget.name]: e.currentTarget.value });
   };
   return (
-    <main className="border rounded-lg p-5 bg-gray-100 dark:bg-gray-900">
+    <main className="border rounded-lg drop-shadow-lg p-5 bg-gray-100 dark:bg-gray-900">
       <h1 className="">Welcome to Pro Tasker</h1>
       <h2>Please login to track your projects.</h2>
       <form onSubmit={handleSubmit} className="flex flex-col">

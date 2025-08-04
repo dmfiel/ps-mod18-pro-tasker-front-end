@@ -29,7 +29,7 @@ export function AddProject({ fetchProjects }: { fetchProjects: () => void }) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="border rounded-lg bg-gray-100 dark:bg-gray-900 p-5 flex flex-col gap-2"
+      className="border rounded-lg drop-shadow-lg bg-gray-100 dark:bg-gray-900 p-5 flex flex-col gap-2"
     >
       <h2>Create a new project:</h2>
       <label htmlFor="name" />

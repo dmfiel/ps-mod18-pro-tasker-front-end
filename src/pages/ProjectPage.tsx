@@ -127,7 +127,7 @@ function ProjectPage({ token }: { token: string }) {
   return (
     <main className="flex flex-col gap-5">
       {!edit && project && (
-        <section className="border rounded-lg bg-gray-100 dark:bg-gray-900 p-5">
+        <section className="border rounded-lg drop-shadow-lg bg-gray-100 dark:bg-gray-900 p-5">
           <h1 className="text-center font-bold">
             {project.name}{' '}
             <IconButton
@@ -153,7 +153,7 @@ function ProjectPage({ token }: { token: string }) {
       {edit && !isEmpty(projectFields) && projectFields && (
         <form
           onSubmit={handleSubmit}
-          className="border rounded-lg bg-gray-100 dark:bg-gray-900 p-5 flex flex-col gap-2 justify-between items-start "
+          className="border rounded-lg drop-shadow-lg drop-shadow-lg bg-gray-100 dark:bg-gray-900 p-5 flex flex-col gap-2 justify-between items-start "
         >
           <h2>Update your project:</h2>
           <label htmlFor="name" />

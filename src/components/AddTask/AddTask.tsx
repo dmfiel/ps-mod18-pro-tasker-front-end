@@ -57,7 +57,7 @@ export function AddTask({
   return (
     <form
       onSubmit={createTask}
-      className="flex justify-between items-start p-4 border rounded-lg shadow-sm hover:shadow-md transition-shadow bg-white dark:bg-black dark:border-gray-700"
+      className="flex justify-between items-start p-4 border rounded-lg drop-shadow-lg shadow-sm hover:shadow-md transition-shadow bg-white dark:bg-black dark:border-gray-700"
     >
       <div className="flex flex-col gap-2">
         <input

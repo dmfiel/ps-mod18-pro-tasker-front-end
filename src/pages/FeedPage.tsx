@@ -62,7 +62,7 @@ function FeedPage() {
       {posts.map((post, index) => (
         <section
           key={index}
-          className="border rounded-lg bg-gray-100 dark:bg-gray-900 p-5"
+          className="border rounded-lg drop-shadow-lg bg-gray-100 dark:bg-gray-900 p-5"
         >
           <h2 className="text-center font-bold">{post.title}</h2>
           <h3>{post.body}</h3>
@@ -70,11 +70,12 @@ function FeedPage() {
       ))}
       <form
         onSubmit={handleSubmit}
-        className="border rounded-lg bg-gray-100 dark:bg-gray-900 p-5"
+        className="border rounded-lg drop-shadow-lg bg-gray-100 dark:bg-gray-900 p-5"
       >
         <h2>What's in your mind?</h2>
         <label htmlFor="title" />
-        <input autoFocus
+        <input
+          autoFocus
           type="text"
           title={title}
           placeholder="title"

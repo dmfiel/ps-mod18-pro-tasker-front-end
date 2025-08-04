@@ -34,7 +34,7 @@ export function TaskFilter({ onFilterChange }: TaskFilterProps) {
   return (
     <nav
       role="navigation"
-      className="flex flex-col gap-5 p-5 bg-green-50 dark:bg-green-950 border rounded-lg w-fit mx-auto"
+      className="flex flex-col gap-5 p-5 bg-green-50 dark:bg-green-950 border rounded-lg drop-shadow-lg w-fit mx-auto"
     >
       <div id="filters" className="flex gap-5 w-fit mx-auto">
         <div>

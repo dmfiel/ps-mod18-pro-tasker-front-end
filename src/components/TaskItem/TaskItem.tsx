@@ -74,7 +74,7 @@ TaskItemProps) {
   }
 
   return (
-    <div className="p-4 border rounded-lg shadow-sm hover:shadow-md transition-shadow bg-gray-100 dark:bg-gray-900 dark:border-gray-700">
+    <div className="p-4 border rounded-lg drop-shadow-lg shadow-sm hover:shadow-md transition-shadow bg-gray-100 dark:bg-gray-900 dark:border-gray-700">
       {!edit && (
         <div className="flex flex-col lg:flex-row justify-between items-start gap-2">
           <div>
