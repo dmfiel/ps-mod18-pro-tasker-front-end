@@ -24,19 +24,16 @@ export function AddTask({
 
   async function createTask(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    console.log('createTask');
     await saveTask();
   }
 
   async function saveTask() {
-    console.log('saveTask');
     try {
-      console.log(taskFields);
       const res = await backendClient.post(`/tasks/`, {
         ...taskFields,
         project: projectId
       });
-      console.log(res);
+      if (!res) throw new Error('Error creating task');
 
       clearTaskFields();
       fetchTasks();
@@ -67,8 +64,7 @@ export function AddTask({
           placeholder="Task Title"
           value={taskFields?.title || ''}
           onChange={onChangeTask}
-                  required={true}
-
+          required={true}
           className="text-lg font-semibold border rounded-md border-black dark:border-white px-2"
         />
         <input

@@ -22,25 +22,19 @@ function ProjectsPage({ token }: { token: string }) {
         );
 
       const res = await backendClient.get('/projects');
-
       setProjects(res.data);
       setAddProject(false);
-
-      console.log(res.data);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
   const fetchTasks = async () => {
     try {
       const res = await backendClient.get(`/tasks`);
-
       setTasks(res.data);
-
-      console.log(res.data);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 

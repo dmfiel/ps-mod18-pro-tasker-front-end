@@ -14,15 +14,14 @@ function LoginPage({ saveToken }: { saveToken: (_token: string) => void }) {
 
     try {
       const res = await backendClient.post('/users/login', { ...formData });
-      console.log(res.data);
       saveToken(res.data.token);
       navigate(
         import.meta.env.PROD
           ? `${import.meta.env.VITE_FRONTEND_BASE}/projects`
           : `../projects`
       );
-    } catch (e) {
-      console.error(e);
+    } catch (error) {
+      console.error(error);
     }
   };
 

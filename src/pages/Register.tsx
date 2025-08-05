@@ -15,7 +15,7 @@ function RegisterPage() {
 
     try {
       const res = await backendClient.post('/users/register', { ...formData });
-      console.log(res.data);
+      if (!res) throw new Error('Error registering user');
       localStorage.setItem('pro-tasker-app-token', res.data.token);
       backendClient.defaults.headers.common['Authorization'] = res.data.token; // update the JWT token for subsequent requests
       return navigate(
@@ -23,8 +23,8 @@ function RegisterPage() {
           ? `${import.meta.env.VITE_FRONTEND_BASE}/signin`
           : `../signin`
       );
-    } catch (e) {
-      console.error(e);
+    } catch (error) {
+      console.error(error);
     }
   };
   const handleChange = async (e: React.FormEvent<HTMLInputElement>) => {

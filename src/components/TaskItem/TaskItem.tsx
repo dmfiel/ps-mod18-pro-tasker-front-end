@@ -32,7 +32,7 @@ TaskItemProps) {
       const res = await backendClient.put(`/tasks/${task._id}`, {
         ...taskFields
       });
-      console.log(res);
+      if (!res) throw new Error('Error updating task');
 
       setEdit(false);
       refreshTasks();
@@ -47,7 +47,7 @@ TaskItemProps) {
       const res = await backendClient.put(`/tasks/${task._id}`, {
         status: e.currentTarget.value
       });
-      console.log(res);
+      if (!res) throw new Error('Error updating task status');
     } catch (error) {
       console.error(error);
     }
@@ -65,7 +65,7 @@ TaskItemProps) {
   async function onDelete() {
     try {
       const res = await backendClient.delete(`/tasks/${task._id}`);
-      console.log(res);
+      if (!res) throw new Error('Error deleting task');
 
       refreshTasks();
     } catch (error) {

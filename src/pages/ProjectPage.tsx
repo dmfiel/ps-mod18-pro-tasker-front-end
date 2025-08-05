@@ -36,9 +36,8 @@ function ProjectPage({ token }: { token: string }) {
 
       setProject(res.data);
       setProjectFields(res.data);
-      console.log(res.data);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -50,10 +49,8 @@ function ProjectPage({ token }: { token: string }) {
 
       setTasks(res.data);
       setAddTask(false);
-
-      console.log(res.data);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -67,7 +64,7 @@ function ProjectPage({ token }: { token: string }) {
           `/projects/${projectId}`,
           projectFields
         );
-        console.log(res);
+        if (!res) throw new Error('Error updating project');
         setProject(projectFields);
       }
 
@@ -95,7 +92,7 @@ function ProjectPage({ token }: { token: string }) {
   async function onDelete() {
     try {
       const res = await backendClient.delete(`/projects/${projectId}`);
-      console.log(res);
+      if (!res) throw new Error('Error deleting project');
 
       // project has been deleted, so there is nothing to show here
       // go back to the projects page

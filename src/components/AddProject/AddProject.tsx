@@ -18,9 +18,10 @@ export function AddProject({ fetchProjects }: { fetchProjects: () => void }) {
         name: projectName,
         description
       });
+      if (!res) throw new Error('Error creating project');
+
       clearProjectFields();
       fetchProjects();
-      console.log(res);
     } catch (error) {
       console.error(error);
     }
