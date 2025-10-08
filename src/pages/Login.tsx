@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { backendClient } from '../clients/backendClient';
 import { useNavigate } from 'react-router-dom';
+import GitHubButton from '../assets/github.png';
 
 function LoginPage({ saveToken }: { saveToken: (_token: string) => void }) {
   const navigate = useNavigate();
@@ -8,6 +9,13 @@ function LoginPage({ saveToken }: { saveToken: (_token: string) => void }) {
     email: import.meta.env.VITE_DEFAULT_LOGIN || '',
     password: import.meta.env.VITE_DEFAULT_PASSWORD || ''
   });
+
+  const handleGitHub = () => {
+    window.open(
+      `${import.meta.env.VITE_BACKEND_URL}/api/users/auth/github`,
+      '_self'
+    );
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -29,10 +37,41 @@ function LoginPage({ saveToken }: { saveToken: (_token: string) => void }) {
     e.preventDefault();
     setFormData({ ...formData, [e.currentTarget.name]: e.currentTarget.value });
   };
+
+  //   .loginButton{
+  //   width: 150px;
+  //   padding: 15px 25px;
+  //   border-radius: 5px;
+  //   color: white;
+  //   display: flex;
+  //   align-items: center;
+  //   font-weight: bold;
+  //   margin-bottom: 20px;
+  //   cursor: pointer;
+  // }
+
+  // .google{
+  //   background-color: #df4930;
+  // }
+  // .facebook{
+  //   background-color: #507cc0;
+  // }
+
   return (
     <main className="border rounded-lg drop-shadow-lg p-5 bg-gray-100 dark:bg-gray-900">
-      <h1 className="">Welcome to Pro Tasker</h1>
+      <h1 className="text-center">Welcome to Pro Tasker</h1>
       <h2>Please login to track your projects.</h2>
+      <div
+        onClick={handleGitHub}
+        className="bg-black mx-auto mt-5 w-35 py-3 px-4 rounded border text-white flex items-center  cursor-pointer"
+      >
+        <img
+          src={GitHubButton}
+          alt="Login with GitHub"
+          className="mr-2.5 w-5 h-5"
+        />
+        GitHub
+      </div>
       <form onSubmit={handleSubmit} className="flex flex-col">
         <label htmlFor="email" className="mt-5">
           Email Address:

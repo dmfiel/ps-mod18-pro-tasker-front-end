@@ -6,6 +6,7 @@ import type { Priority, TaskType, TaskStatus } from '../../types';
 
 export function Dashboard({ tasks }: { tasks: TaskType[] }) {
   function taskCount(priority: Priority, status: TaskStatus): number {
+    if (!tasks) return 0;
     return tasks.filter(t => t.priority === priority && t.status === status)
       .length;
   }

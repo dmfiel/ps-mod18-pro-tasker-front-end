@@ -8,6 +8,7 @@ export const backendClient = axios.create({
 export function setupCatch401(navigate: NavigateFunction, token: string) {
   // ensure that auth token is sent on first requests
   backendClient.defaults.headers.common['Authorization'] = token;
+  backendClient.defaults.headers.common['Authorization'] = token;
 
   // check all API calls for 401 errors (bad/expired token)
   // and send them to the login page

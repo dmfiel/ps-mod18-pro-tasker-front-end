@@ -6,12 +6,17 @@ import ThemeProvider, {
   ThemeButton,
   ThemeContext
 } from './context/ThemeContext';
-import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+  useNavigate,
+  useSearchParams
+} from 'react-router-dom';
 import { HomePage } from './pages/Home';
 import RegisterPage from './pages/Register';
 import LoginPage from './pages/Login';
 import Navbar from './components/Navbar';
-import FeedPage from './pages/FeedPage';
 import ProjectsPage from './pages/ProjectsPage';
 import { backendClient, setupCatch401 } from './clients/backendClient';
 import ProjectPage from './pages/ProjectPage';
@@ -32,6 +37,8 @@ function ThemeWrapper() {
   const { theme } = useContext(ThemeContext);
   const navigate = useNavigate();
 
+  const [searchParams] = useSearchParams();
+
   const [token, setToken] = useState(
     localStorage.getItem('pro-tasker-app-token') || ''
   );
@@ -39,6 +46,17 @@ function ThemeWrapper() {
   function saveToken(token: string) {
     setToken(token);
   }
+
+  useEffect(() => {
+    if (searchParams.has('token')) {
+      const tokenParam = searchParams.get('token');
+      if (tokenParam && tokenParam.length > 5) {
+        setToken(tokenParam);
+        // Remove the token parameter, so we don't try to login again
+        searchParams.delete('token');
+      }
+    }
+  });
 
   useEffect(() => {
     localStorage.setItem('pro-tasker-app-token', token);
@@ -69,7 +87,7 @@ function ThemeWrapper() {
         <Routes>
           <Route
             path={`${import.meta.env.VITE_FRONTEND_BASE}/`}
-            element={<HomePage />}
+            element={token ? <ProjectsPage token={token} /> : <HomePage />}
           />
           <Route
             path={`${import.meta.env.VITE_FRONTEND_BASE}/register`}
@@ -79,10 +97,6 @@ function ThemeWrapper() {
             path={`${import.meta.env.VITE_FRONTEND_BASE}/signin`}
             element={<LoginPage saveToken={saveToken} />}
           />
-          <Route
-            path={`${import.meta.env.VITE_FRONTEND_BASE}/feed`}
-            element={<FeedPage />}
-          />{' '}
           <Route
             path={`${import.meta.env.VITE_FRONTEND_BASE}/projects`}
             element={<ProjectsPage token={token} />}
