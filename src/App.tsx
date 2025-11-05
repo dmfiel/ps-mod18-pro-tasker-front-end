@@ -22,6 +22,7 @@ import { backendClient, setupCatch401 } from './clients/backendClient';
 import ProjectPage from './pages/ProjectPage';
 import bgLight from './assets/bg-light.jpg';
 import bgDark from './assets/bg-dark.jpg';
+import { LoadingSpinner } from './components/LoadingSpinner/LoadingSpinner';
 
 function App() {
   return (
@@ -36,9 +37,8 @@ function App() {
 function ThemeWrapper() {
   const { theme } = useContext(ThemeContext);
   const navigate = useNavigate();
-
   const [searchParams] = useSearchParams();
-
+  const [loading, setLoading] = useState(false);
   const [token, setToken] = useState(
     localStorage.getItem('pro-tasker-app-token') || ''
   );
@@ -87,25 +87,34 @@ function ThemeWrapper() {
         <Routes>
           <Route
             path={`${import.meta.env.VITE_FRONTEND_BASE}/`}
-            element={token ? <ProjectsPage token={token} /> : <HomePage />}
-          />
-          <Route
-            path={`${import.meta.env.VITE_FRONTEND_BASE}/register`}
-            element={<RegisterPage />}
-          />
-          <Route
-            path={`${import.meta.env.VITE_FRONTEND_BASE}/signin`}
-            element={<LoginPage saveToken={saveToken} />}
+            element={
+              token ? (
+                <ProjectsPage token={token} setLoading={setLoading} />
+              ) : (
+                <HomePage />
+              )
+            }
           />
           <Route
             path={`${import.meta.env.VITE_FRONTEND_BASE}/projects`}
-            element={<ProjectsPage token={token} />}
+            element={<ProjectsPage token={token} setLoading={setLoading} />}
+          />
+          <Route
+            path={`${import.meta.env.VITE_FRONTEND_BASE}/register`}
+            element={<RegisterPage setLoading={setLoading} />}
+          />
+          <Route
+            path={`${import.meta.env.VITE_FRONTEND_BASE}/signin`}
+            element={
+              <LoginPage saveToken={saveToken} setLoading={setLoading} />
+            }
           />
           <Route
             path={`${import.meta.env.VITE_FRONTEND_BASE}/project/:projectId`}
             element={<ProjectPage token={token} />}
           />
         </Routes>
+        {loading && <LoadingSpinner text="Connecting, please be patient..." />}
       </main>
       <footer role="contentinfo">
         <a

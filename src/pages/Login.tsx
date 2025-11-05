@@ -3,7 +3,13 @@ import { backendClient } from '../clients/backendClient';
 import { useNavigate } from 'react-router-dom';
 import GitHubButton from '../assets/github.png';
 
-function LoginPage({ saveToken }: { saveToken: (_token: string) => void }) {
+function LoginPage({
+  saveToken,
+  setLoading
+}: {
+  saveToken: (_token: string) => void;
+  setLoading: (_loading: boolean) => void;
+}) {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: import.meta.env.VITE_DEFAULT_LOGIN || '',
@@ -11,6 +17,7 @@ function LoginPage({ saveToken }: { saveToken: (_token: string) => void }) {
   });
 
   const handleGitHub = () => {
+    setLoading(true);
     window.open(
       `${import.meta.env.VITE_BACKEND_URL}/api/users/auth/github`,
       '_self'
@@ -21,7 +28,9 @@ function LoginPage({ saveToken }: { saveToken: (_token: string) => void }) {
     e.preventDefault();
 
     try {
+      setLoading(true);
       const res = await backendClient.post('/users/login', { ...formData });
+      setLoading(false);
       saveToken(res.data.token);
       navigate(
         import.meta.env.PROD
@@ -29,6 +38,7 @@ function LoginPage({ saveToken }: { saveToken: (_token: string) => void }) {
           : `../projects`
       );
     } catch (error) {
+      setLoading(false);
       console.error(error);
     }
   };

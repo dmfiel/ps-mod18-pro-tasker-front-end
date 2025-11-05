@@ -2,7 +2,11 @@ import { useState } from 'react';
 import { backendClient } from '../clients/backendClient';
 import { useNavigate } from 'react-router-dom';
 
-function RegisterPage() {
+function RegisterPage({
+  setLoading
+}: {
+  setLoading: (_loading: boolean) => void;
+}) {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: '',
@@ -14,7 +18,9 @@ function RegisterPage() {
     e.preventDefault();
 
     try {
+      setLoading(true);
       const res = await backendClient.post('/users/register', { ...formData });
+      setLoading(false);
       if (!res) throw new Error('Error registering user');
       localStorage.setItem('pro-tasker-app-token', res.data.token);
       backendClient.defaults.headers.common['Authorization'] = res.data.token; // update the JWT token for subsequent requests
@@ -24,13 +30,16 @@ function RegisterPage() {
           : `../signin`
       );
     } catch (error) {
+      setLoading(false);
       console.error(error);
     }
   };
+
   const handleChange = async (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault();
     setFormData({ ...formData, [e.currentTarget.name]: e.currentTarget.value });
   };
+
   return (
     <main className="border rounded-lg drop-shadow-lg p-5 bg-gray-100 dark:bg-gray-900">
       <h1 className="font-bold">Registration Page</h1>

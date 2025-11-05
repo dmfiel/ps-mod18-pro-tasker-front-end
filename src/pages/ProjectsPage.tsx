@@ -6,7 +6,13 @@ import type { ProjectType, TaskType } from '../types';
 import { AddProject } from '../components/AddProject/AddProject';
 import { Dashboard } from '../components/Dashboard/Dashboard';
 
-function ProjectsPage({ token }: { token: string }) {
+function ProjectsPage({
+  token,
+  setLoading
+}: {
+  token: string;
+  setLoading: (_loading: boolean) => void;
+}) {
   const navigate = useNavigate();
   const [projects, setProjects] = useState(new Array<ProjectType>());
   const [addProject, setAddProject] = useState(false);
@@ -41,6 +47,7 @@ function ProjectsPage({ token }: { token: string }) {
   useEffect(() => {
     fetchProjects();
     fetchTasks();
+    setLoading(false);
   }, []);
 
   return (
